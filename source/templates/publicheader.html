@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="../static/css/style_publicheader.css">
+
+<nav>
+    <a href="{{ url_for('home') }}"><img class="logo" src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo-black.svg" alt="" width="40" height="30"></a>
+     <ul class="menu">
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('home') }}">Saiba Mais</a></li>
+        <li><a id="buttonPublicNav" href="{{ url_for('login_criarconta') }}">Login/Criar Conta</a></li>
+       </ul>
+       <ul class="button">
+           <li></li>
+           <li></li>
+           <li></li>
+       </ul>
+<script>
+    let menuIsOpened = false;
+const button = document.querySelector('nav ul.button');
+const menu = document.querySelector('nav ul.menu');
+
+button.addEventListener("click", () => {
+    if (!menuIsOpened) {
+        menu.style.display = 'flex';
+        menuIsOpened = true;
+    } else {
+        menu.style.display = 'none';
+        menuIsOpened = false;
+    }
+})
+
+button.removeEventListener('click', this.onClick);
+</script>
+    </nav>

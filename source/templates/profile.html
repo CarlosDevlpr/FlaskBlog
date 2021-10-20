@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="../static/css/style_profilecard.css">
+{% endblock %}
+
+{% block body %}
+
+<section>
+  <div class="header">
+    <figure id="avatar">
+      <img id="avatar_img" src="{{ profile_picture }}" alt="Avatar">
+    </figure>
+  </div>
+  <div class="info">
+    <h2>{{ current_user.username }}</h2>
+    <a href="#">{{ current_user.email }}</a>
+  </div>
+    <a href="{{ url_for('edit_profile') }}"><button class="edit_button">Editar Perfil</button></a>
+
+{% block form_edit_profile %}
+{% endblock %}
+{% endblock %}

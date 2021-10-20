@@ -1,0 +1,56 @@
+{% extends 'profile.html' %}
+
+{% block form_edit_profile %}
+    <form method="POST"  enctype="multipart/form-data"> 
+        {{ form.csrf_token }}
+        <fieldset id="formulario_editprofile">
+
+            <div>
+                {{ form.username.label(class="edit_profile_username_label") }}
+                <br>
+                    {% if form.username.errors %}
+                        {{ form.username(class="form-control is-invalid") }}
+                        <div>
+                            {% for erro in form.username.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.username(class="edit_profile_username") }}
+                    {% endif %}
+            </div>
+
+            <div>
+                {{ form.email.label(class="form-control-label") }}
+                <br>
+                    {% if form.email.errors %}
+                        {{ form.email(class="form-control is-invalid") }}
+                        <div>
+                            {% for erro in form.email.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.email(class="form-control") }}
+                    {% endif %}
+            </div>               
+                        
+            <div>
+                {{ form.profile_pic.label }}
+                <br>
+                    {{ form.profile_pic(class="form-control-file") }}
+                        {% if form.profile_pic.errors %}
+                            {% for error in form.profile_pic.errors %}
+                                <span>{{ error }}</span>
+                                <br>
+                            {% endfor %}
+                        {% endif %}
+            </div>           
+
+            {{ form.submit_editarperfil (class="save_edit_button")}}
+
+        </fieldset>
+    </form>
+</section>
+{% endblock %}
+

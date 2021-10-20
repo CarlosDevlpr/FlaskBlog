@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="../static/css/style_createpost.css">
+{% endblock %}
+
+{% block body %}
+<div id="container">
+    <form method="POST">
+            {{ form.csrf_token }}
+                <h4>Criar Post</h4>
+                <fieldset>
+                    <div>
+                        {{ form.title.label(class="form-control-label") }}
+                        {% if form.title.errors %}
+                            {{ form.title(class="form-control is-invalid") }}
+                        <div>
+                            {% for erro in form.title.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.title(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    <div>
+                        {{ form.body.label(class="form-control-label mt-2") }}
+                        {% if form.body.errors %}
+                            {{ form.body(class="form-control is-invalid") }}
+                        <div>
+                            {% for erro in form.body.errors %}
+                                {{ erro }}
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                            {{ form.body(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    {{ form.submit_criarpost(class="create_post_button") }}
+                </fieldset>
+
+        </form>
+    </div>
+{% endblock %}

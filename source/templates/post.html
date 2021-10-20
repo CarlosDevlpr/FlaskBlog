@@ -1,0 +1,93 @@
+{% extends 'base.html' %} 
+
+{% block head %}
+<link rel="stylesheet" href="../static/css/style_editpost.css">
+{% endblock %}
+
+{% block body %}
+<div id="editpost">
+    <div>
+        <img src="{{ url_for('static', filename='fotos_perfil/{}'.format(post.author.profile_pic)) }}" class="rounded" width="155">
+                <strong>{{ post.author.username }}</strong><br>
+            </div>
+            <div>
+                <h3>{{ post.title }}
+                    <small class="text-muted" style="font-size: 15px">- Data de Criação: {{ post.creation_date.strftime('%d/%m/%Y') }}
+                        {% if form %}
+                        - <a href="#form_editarpost">Editar Post</a> / <a  href="#" data-bs-toggle="modal" data-bs-target="#ExcluirPost">Excluir Post</a>
+                        {% endif %}
+                    </small>
+                </h3>
+                <hr>
+                <p>{{ post.body }}</p>
+            </div>
+
+{% if form %}
+    <div>
+        <hr>
+        <div>
+            <div>
+                <form method="POST" action="" id="form_editarpost">
+                    {{ form.csrf_token }}
+                    <h4>Editar Post</h4>
+                    <fieldset>
+                        <div>
+                            {{ form.title.label(class="form-control-label") }}
+                            {% if form.title.errors %}
+                                {{ form.title(class="form-control is-invalid") }}
+                            <div>
+                                {% for erro in form.title.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form.title(class="form-control") }}
+                            {% endif %}
+                        </div>
+                        <div>
+                            {{ form.body.label(class="form-control-label mt-2") }}
+                            {% if form.body.errors %}
+                                {{ form.body(class="form-control is-invalid") }}
+                            <div>
+                                {% for erro in form.body.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form.body(class="form-control") }}
+                            {% endif %}
+                        </div>
+                    </fieldset>
+                    {{ form.submit_criarpost(class="btn btn-dark mt-2") }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<!-- Modal -->
+<div  id="ExcluirPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div>
+    <div>
+      <div>
+        <h5 class="modal-title" id="exampleModalLabel">Deseja realmente excluir este post?</h5>
+        <button type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div>
+        Essa ação não poderá ser desfeita, e esse post será removido do seu perfil.
+      </div>
+      <div>
+        <button type="button" data-bs-dismiss="modal">Não</button>
+        <form method="POST" action="{{ url_for('excluir_post', post_id=post.id) }}">
+          {{ form.csrf_token }}
+          <button type="submit">Excluir Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+ </div>
+</div>
+
+</div>
+
+{% endblock %}

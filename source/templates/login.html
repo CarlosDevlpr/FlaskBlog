@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+    {% block head %}
+		<link rel="stylesheet" href="../static/css/style_loginpage.css">
+    {% endblock %}
+
+{% block body %}
+
+<section>
+<div class="form-modal">
+    
+    <div class="form-toggle">
+        <button id="login-toggle" onclick="toggleLogin()">log in</button>
+        <button id="signup-toggle" onclick="toggleSignup()">Criar conta</button>
+    </div>
+
+    <div id="login-form">
+        <form method="POST" action="">
+            {{ form_login.csrf_token }}
+
+            <!-- email -->
+            {{ form_login.email.label }}
+                            {% if form_login.email.errors %}
+                                {{ form_login.email }}
+                            <div class="invalid-feedback">
+                                {% for erro in form_login.email.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form_login.email }}
+                            {% endif %}
+            <!-- Senha -->
+            
+            {{ form_login.password.label }}
+                            {% if form_login.password.errors %}
+                                {{ form_login.password }}
+                            <div>
+                                {% for erro in form_login.senha.errors %}
+                                    {{ erro }}
+                                {% endfor %}
+                            </div>
+                            {% else %}
+                                {{ form_login.password }}
+                            {% endif %}
+
+            {{ form_login.submit_login }}
+            <p><a href="javascript:void(0)">Esqueceu sua senha?</a></p>
+            <hr/>
+        </form>
+    </div>
+
+    <div id="signup-form">
+        <form method="POST" action="">
+            {{ form_criarconta.csrf_token }}
+
+            <!-- Email -->
+            {{ form_criarconta.email.label }}
+            {% if form_criarconta.email.errors %}
+                {{ form_criarconta.email }}
+            <div class="invalid-feedback">
+                {% for erro in form_criarconta.email.errors %}
+                    {{ erro }}
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form_criarconta.email }}
+            {% endif %}
+
+            <!-- Username -->
+            <div class="form-group">
+                {{ form_criarconta.username.label }}
+                {% if form_criarconta.username.errors %}
+                    {{ form_criarconta.username }}
+                <div>
+                    {% for erro in form_criarconta.username.errors %}
+                        {{ erro }}
+                    {% endfor %}
+                </div>
+                {% else %}
+                    {{ form_criarconta.username }}
+                {% endif %}
+    
+            <!-- Senha -->
+            {{ form_criarconta.password.label }}
+            {% if form_criarconta.password.errors %}
+                {{ form_criarconta.password }}
+            <div class="invalid-feedback">
+                {% for erro in form_criarconta.password.errors %}
+                    {{ erro }}
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form_criarconta.password }}
+            {% endif %}
+            
+            <!-- Confirmação de senha -->
+            {{ form_criarconta.confirm_password.label }}
+            {% if form_criarconta.confirm_password.errors %}
+                {{ form_criarconta.confirm_password }}
+            <div>
+                {% for erro in form_criarconta.confirm_password.errors %}
+                    {{ erro }}
+                {% endfor %}
+            </div>
+            {% else %}
+                {{ form_criarconta.confirm_password }}
+            {% endif %}
+            <div id="submitcreate">
+                {{ form_criarconta.submit_criarconta }}
+            </div>'
+
+            <p>Clicar em <strong> crie sua conta</strong> significa que você concorda com nossos <a href="javascript:void(0)">termos de serviços</a>.</p>
+            <hr/>
+            </form>
+    </div>
+
+    <br>
+</div>
+</section>
+
+<script src="../static/javascript/form_toggle.js"></script>
+
+{% endblock %}
